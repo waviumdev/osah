@@ -432,95 +432,88 @@
 
   <script src="nav.js"></script>
 
-  <script>
-    // Footer year
-    document.getElementById("year").textContent = new Date().getFullYear();
+<script>
+  // Footer year
+  document.getElementById("year").textContent = new Date().getFullYear();
 
-    // Toggle plateformes secondaires
-    document.querySelectorAll("[data-toggle-platforms]").forEach((toggle) => {
-      toggle.addEventListener("click", () => {
-        const block = toggle.nextElementSibling;
-        if (!block) return;
-        const isOpen = !block.classList.contains("hidden");
-        block.classList.toggle("hidden");
-        toggle.textContent = isOpen ? "+ Autres plateformes" : "– Masquer";
-      });
-    });
-
-    // Collabs toggle
-    (function () {
-      const wrap = document.querySelector("[data-collabs]");
-      if (!wrap) return;
-
-      const chips = wrap.querySelectorAll(".chip");
-      const btn = wrap.querySelector("[data-toggle-collabs]");
-      const counter = wrap.querySelector("[data-collabs-count]");
-      const LIMIT = 28;
-
-      if (counter) counter.textContent = `${chips.length} collaborations`;
-
-      if (chips.length <= LIMIT) {
-        if (btn) btn.style.display = "none";
-        return;
-      }
-
-      chips.forEach((chip, i) => { if (i >= LIMIT) chip.classList.add("chip-hidden"); });
-
-      btn.addEventListener("click", () => {
-        const expanded = btn.getAttribute("aria-expanded") === "true";
-        btn.setAttribute("aria-expanded", String(!expanded));
-        btn.textContent = expanded ? "Afficher plus" : "Afficher moins";
-
-        chips.forEach((chip, i) => {
-          if (i >= LIMIT) chip.classList.toggle("chip-hidden", expanded);
-        });
-      });
-    })();
-
-    // Toggle par années (discographie / apparitions) - version robuste (scope par section)
-    function initYearToggle(containerSelector, buttonSelector, counterSelector, limitYears = 3) {
-      const container = document.querySelector(containerSelector);
-      if (!container) return;
-
-      const section = container.closest("section") || document;
-      const btn = section.querySelector(buttonSelector);
-      const counter = section.querySelector(counterSelector);
-
-      const years = container.querySelectorAll(".disc-year");
-      if (counter) counter.textContent = `${years.length} années`;
-
-      if (!btn || years.length <= limitYears) {
-        if (btn) btn.style.display = "none";
-        return;
-      }
-
-      years.forEach((y, i) => { if (i >= limitYears) y.classList.add("disc-hidden"); });
-
-      btn.addEventListener("click", () => {
-        const expanded = btn.getAttribute("aria-expanded") === "true";
-        btn.setAttribute("aria-expanded", String(!expanded));
-        btn.textContent = expanded ? "Afficher plus" : "Afficher moins";
-
-        years.forEach((y, i) => {
-          if (i >= limitYears) y.classList.toggle("disc-hidden", expanded);
-        });
-      });
-    }
-
-    // Discographie (artiste principal)
-    initYearToggle("[data-discography]", "[data-toggle-discography]", "[data-discography-count]", 3);
-
-    // Apparitions (invité)
-    initYearToggle("[data-features]", "[data-toggle-features]", "[data-features-count]", 3);
-  </script>
-    <script>
+  // Enlève l'état preload au chargement (une seule fois)
   window.addEventListener("load", () => {
     document.body.classList.remove("preload");
   });
-</script>
 
-    
-<script>
+  // Toggle plateformes secondaires
+  document.querySelectorAll("[data-toggle-platforms]").forEach((toggle) => {
+    toggle.addEventListener("click", () => {
+      const block = toggle.nextElementSibling;
+      if (!block) return;
+      const isOpen = !block.classList.contains("hidden");
+      block.classList.toggle("hidden");
+      toggle.textContent = isOpen ? "+ Autres plateformes" : "– Masquer";
+    });
+  });
+
+  // Collabs toggle
+  (function () {
+    const wrap = document.querySelector("[data-collabs]");
+    if (!wrap) return;
+
+    const chips = wrap.querySelectorAll(".chip");
+    const btn = wrap.querySelector("[data-toggle-collabs]");
+    const counter = wrap.querySelector("[data-collabs-count]");
+    const LIMIT = 28;
+
+    if (counter) counter.textContent = `${chips.length} collaborations`;
+
+    if (!btn || chips.length <= LIMIT) {
+      if (btn) btn.style.display = "none";
+      return;
+    }
+
+    chips.forEach((chip, i) => { if (i >= LIMIT) chip.classList.add("chip-hidden"); });
+
+    btn.addEventListener("click", () => {
+      const expanded = btn.getAttribute("aria-expanded") === "true";
+      btn.setAttribute("aria-expanded", String(!expanded));
+      btn.textContent = expanded ? "Afficher plus" : "Afficher moins";
+
+      chips.forEach((chip, i) => {
+        if (i >= LIMIT) chip.classList.toggle("chip-hidden", expanded);
+      });
+    });
+  })();
+
+  // Toggle par années (discographie / apparitions)
+  function initYearToggle(containerSelector, buttonSelector, counterSelector, limitYears = 3) {
+    const container = document.querySelector(containerSelector);
+    if (!container) return;
+
+    const section = container.closest("section") || document;
+    const btn = section.querySelector(buttonSelector);
+    const counter = section.querySelector(counterSelector);
+    const years = container.querySelectorAll(".disc-year");
+
+    if (counter) counter.textContent = `${years.length} années`;
+
+    if (!btn || years.length <= limitYears) {
+      if (btn) btn.style.display = "none";
+      return;
+    }
+
+    years.forEach((y, i) => { if (i >= limitYears) y.classList.add("disc-hidden"); });
+
+    btn.addEventListener("click", () => {
+      const expanded = btn.getAttribute("aria-expanded") === "true";
+      btn.setAttribute("aria-expanded", String(!expanded));
+      btn.textContent = expanded ? "Afficher plus" : "Afficher moins";
+
+      years.forEach((y, i) => {
+        if (i >= limitYears) y.classList.toggle("disc-hidden", expanded);
+      });
+    });
+  }
+
+  initYearToggle("[data-discography]", "[data-toggle-discography]", "[data-discography-count]", 3);
+  initYearToggle("[data-features]", "[data-toggle-features]", "[data-features-count]", 3);
 
   // Reveal ciné au scroll
   (function () {
@@ -530,7 +523,6 @@
     const items = document.querySelectorAll(".card");
     items.forEach((el, i) => {
       el.classList.add("reveal");
-      // petit stagger (ciné = lent)
       el.style.setProperty("--d", `${Math.min(i * 70, 420)}ms`);
     });
 
@@ -541,13 +533,11 @@
           io.unobserve(entry.target);
         }
       });
-    }, {
-      threshold: 0.12,
-      rootMargin: "0px 0px -8% 0px"
-    });
+    }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
 
     items.forEach((el) => io.observe(el));
   })();
 </script>
+
 </body>
 </html>
