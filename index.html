@@ -296,8 +296,19 @@
 
 </div>
 
-    </section>
 
+  <div class="chips-actions">
+    <button class="btn smallbtn" type="button" data-toggle-discography aria-expanded="false">
+      Afficher plus
+    </button>
+    <span class="muted small" data-discography-count></span>
+  </div>
+</section>
+
+
+
+
+      
     <section id="collabs" class="card">
       <div class="card-head">
         <h2>Collaborations &amp; Featurings</h2>
@@ -451,7 +462,37 @@ document.querySelectorAll("[data-toggle-platforms]").forEach(toggle => {
     toggle.textContent = isOpen ? "+ Autres plateformes" : "– Masquer";
   });
 });
+// Discography toggle (Afficher plus / moins)
+(function () {
+  const disc = document.querySelector("[data-discography]");
+  if (!disc) return;
 
+  const btn = document.querySelector("[data-toggle-discography]");
+  const counter = document.querySelector("[data-discography-count]");
+
+  // IMPORTANT : chaque ligne de discographie doit avoir la classe .disc-item
+  const items = disc.querySelectorAll(".disc-item");
+  const LIMIT = 18;
+
+  if (counter) counter.textContent = `${items.length} sorties`;
+
+  if (items.length <= LIMIT) {
+    if (btn) btn.style.display = "none";
+    return;
+  }
+
+  items.forEach((it, i) => { if (i >= LIMIT) it.classList.add("disc-item-hidden"); });
+
+  btn.addEventListener("click", () => {
+    const expanded = btn.getAttribute("aria-expanded") === "true";
+    btn.setAttribute("aria-expanded", String(!expanded));
+    btn.textContent = expanded ? "Afficher plus" : "Afficher moins";
+
+    items.forEach((it, i) => {
+      if (i >= LIMIT) it.classList.toggle("disc-item-hidden", expanded);
+    });
+  });
+})();
 
     })();
   </script>
