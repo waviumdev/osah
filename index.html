@@ -174,12 +174,13 @@
       </div>
 
       <div class="discography" data-discography>
-                <div class="disc-year">
+        <div class="disc-year">
           <h3>2025</h3>
           <ul>
             <li><strong>Entre Colère Saine et Pensées Vives</strong> — Album (Koverbalprod &amp; 7ème Sens) — <span class="muted">Osah sur 5 titres</span></li>
           </ul>
         </div>
+
         <div class="disc-year">
           <h3>2024</h3>
           <ul>
@@ -245,12 +246,11 @@
       </div>
 
       <div class="chips-actions">
-  <button class="btn smallbtn" type="button" data-toggle-features aria-expanded="false">Afficher plus</button>
-  <span class="muted small" data-features-count></span>
-        </div>
+        <button class="btn smallbtn" type="button" data-toggle-discography aria-expanded="false">Afficher plus</button>
+        <span class="muted small" data-discography-count></span>
+      </div>
     </section>
 
-    <div class="discography" data-features>
     <!-- APPARITIONS -->
     <section id="apparitions" class="card">
       <div class="card-head">
@@ -314,10 +314,11 @@
           </ul>
         </div>
       </div>
+
       <div class="chips-actions">
-  <button class="btn smallbtn" type="button" data-toggle-features aria-expanded="false">Afficher plus</button>
-  <span class="muted small" data-features-count></span>
-</div>
+        <button class="btn smallbtn" type="button" data-toggle-features aria-expanded="false">Afficher plus</button>
+        <span class="muted small" data-features-count></span>
+      </div>
     </section>
 
     <section id="collabs" class="card">
@@ -427,6 +428,7 @@
   </main>
 
   <script src="nav.js"></script>
+
   <script>
     // Footer year
     document.getElementById("year").textContent = new Date().getFullYear();
@@ -472,58 +474,24 @@
       });
     })();
 
+    // Toggle par années (discographie / apparitions) - version robuste (scope par section)
     function initYearToggle(containerSelector, buttonSelector, counterSelector, limitYears = 3) {
-  const container = document.querySelector(containerSelector);
-  if (!container) return;
+      const container = document.querySelector(containerSelector);
+      if (!container) return;
 
-  const btn = document.querySelector(buttonSelector);
-  const counter = document.querySelector(counterSelector);
-  const years = container.querySelectorAll(".disc-year");
+      const section = container.closest("section") || document;
+      const btn = section.querySelector(buttonSelector);
+      const counter = section.querySelector(counterSelector);
 
-  if (counter) counter.textContent = `${years.length} années`;
-
-  if (!btn || years.length <= limitYears) {
-    if (btn) btn.style.display = "none";
-    return;
-  }
-
-  // cache tout ce qui est après les X premières années
-  years.forEach((y, i) => { if (i >= limitYears) y.classList.add("disc-hidden"); });
-
-  btn.addEventListener("click", () => {
-    const expanded = btn.getAttribute("aria-expanded") === "true";
-    btn.setAttribute("aria-expanded", String(!expanded));
-    btn.textContent = expanded ? "Afficher plus" : "Afficher moins";
-
-    years.forEach((y, i) => {
-      if (i >= limitYears) y.classList.toggle("disc-hidden", expanded);
-    });
-  });
-}
-
-// Discographie (artiste principal)
-initYearToggle("[data-discography]", "[data-toggle-discography]", "[data-discography-count]", 3);
-
-// Apparitions (invité)
-initYearToggle("[data-features]", "[data-toggle-features]", "[data-features-count]", 3);
-    // Discography toggle (par années)
-    (function () {
-      const disc = document.querySelector("[data-discography]");
-      if (!disc) return;
-
-      const btn = document.querySelector("[data-toggle-discography]");
-      const counter = document.querySelector("[data-discography-count]");
-      const years = disc.querySelectorAll(".disc-year");
-      const LIMIT = 3; // années visibles
-
+      const years = container.querySelectorAll(".disc-year");
       if (counter) counter.textContent = `${years.length} années`;
 
-      if (years.length <= LIMIT) {
+      if (!btn || years.length <= limitYears) {
         if (btn) btn.style.display = "none";
         return;
       }
 
-      years.forEach((y, i) => { if (i >= LIMIT) y.classList.add("disc-hidden"); });
+      years.forEach((y, i) => { if (i >= limitYears) y.classList.add("disc-hidden"); });
 
       btn.addEventListener("click", () => {
         const expanded = btn.getAttribute("aria-expanded") === "true";
@@ -531,10 +499,16 @@ initYearToggle("[data-features]", "[data-toggle-features]", "[data-features-coun
         btn.textContent = expanded ? "Afficher plus" : "Afficher moins";
 
         years.forEach((y, i) => {
-          if (i >= LIMIT) y.classList.toggle("disc-hidden", expanded);
+          if (i >= limitYears) y.classList.toggle("disc-hidden", expanded);
         });
       });
-    })();
+    }
+
+    // Discographie (artiste principal)
+    initYearToggle("[data-discography]", "[data-toggle-discography]", "[data-discography-count]", 3);
+
+    // Apparitions (invité)
+    initYearToggle("[data-features]", "[data-toggle-features]", "[data-features-count]", 3);
   </script>
 </body>
 </html>
