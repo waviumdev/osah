@@ -346,6 +346,19 @@
           if (i >= LIMIT) chip.classList.toggle("chip-hidden", expanded);
         });
       });
+// Toggle plateformes secondaires
+document.querySelectorAll("[data-toggle-platforms]").forEach(toggle => {
+  toggle.addEventListener("click", () => {
+    const block = toggle.nextElementSibling;
+    if (!block) return;
+
+    const isOpen = !block.classList.contains("hidden");
+    block.classList.toggle("hidden");
+    toggle.textContent = isOpen ? "+ Autres plateformes" : "– Masquer";
+  });
+});
+
+
     })();
   </script>
 </body>
