@@ -32,23 +32,48 @@ body{
   color:var(--text);
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   line-height:1.65;
+
+  /* IMPORTANT: base stacking pour éviter que les overlays bloquent les clics */
+  position: relative;
+  z-index: 0;
+
   background:
     radial-gradient(900px 600px at 20% -10%, rgba(214,178,94,0.16) 0%, rgba(214,178,94,0) 60%),
     radial-gradient(700px 480px at 90% 10%, rgba(240,211,138,0.10) 0%, rgba(240,211,138,0) 55%),
     linear-gradient(180deg, var(--bg0) 0%, var(--bg1) 55%, #06060a 100%);
 }
 
-/* petite texture + profondeur globale (très léger) */
-body::before{
+/* =========================
+   Overlays CINEMA (SAFE)
+   =========================
+   -> z-index: -1 pour qu'ils soient toujours derrière.
+*/
+body::before,
+body::after{
   content:"";
   position: fixed;
   inset: 0;
   pointer-events:none;
+  z-index: -1; /* <- clé: ne bloque jamais les clics */
+}
+
+body::before{
   background:
     radial-gradient(800px 300px at 15% 25%, rgba(255,255,255,0.035), transparent 60%),
     radial-gradient(700px 260px at 85% 65%, rgba(255,255,255,0.025), transparent 55%);
   mix-blend-mode: screen;
   opacity: .9;
+}
+
+body::after{
+  background-image:
+    repeating-linear-gradient(0deg,
+      rgba(255,255,255,0.018),
+      rgba(255,255,255,0.018) 1px,
+      transparent 1px,
+      transparent 3px);
+  opacity: .08;
+  mix-blend-mode: overlay;
 }
 
 a{ color:inherit; }
@@ -217,16 +242,18 @@ a{ color:inherit; }
   position: relative;
   cursor: pointer;
   user-select: none;
+
+  /* assure que le bouton est cliquable au-dessus */
+  z-index: 1;
 }
 
 .btn::after{
-  /* shine léger */
   content:"";
   position:absolute;
   inset:0;
   border-radius: 999px;
   background: radial-gradient(120px 40px at 25% 20%, rgba(255,255,255,0.18), transparent 60%);
-  opacity: .0;
+  opacity: 0;
   transition: opacity .18s var(--ease);
   pointer-events:none;
 }
@@ -294,7 +321,6 @@ a{ color:inherit; }
   height: auto;
   display:block;
   border-radius: calc(var(--radius) - 4px);
-  /* rendu photo plus “pro” */
   filter: contrast(1.06) saturate(1.06);
   transform: scale(1.001);
   transition: transform .35s var(--ease), filter .35s var(--ease);
@@ -317,6 +343,12 @@ a{ color:inherit; }
   transition: transform .18s var(--ease), border-color .18s var(--ease), box-shadow .18s var(--ease);
 }
 
+/* IMPORTANT: les pseudo-elements ne doivent jamais capturer les clics */
+.card::before,
+.card::after{
+  pointer-events: none;
+}
+
 .card::before{
   content:"";
   position:absolute;
@@ -327,8 +359,8 @@ a{ color:inherit; }
     linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.05) 45%, transparent 60%);
   background-size: auto, auto, 220% 220%;
   background-position: center, center, 0% 0%;
-  animation: cardShine 10s var(--ease) infinite;
-  opacity: .50;
+  animation: cardShine 12s var(--ease) infinite;
+  opacity: .45;
 }
 
 @keyframes cardShine{
@@ -337,14 +369,12 @@ a{ color:inherit; }
   100% { background-position: center, center, 0% 0%; }
 }
 
-/* petite bordure interne “verre” */
 .card::after{
   content:"";
   position:absolute;
   inset: 1px;
   border-radius: calc(var(--radius) - 1px);
   border: 1px solid rgba(255,255,255,0.06);
-  pointer-events:none;
   opacity: .8;
 }
 
@@ -362,7 +392,7 @@ a{ color:inherit; }
   margin-bottom: 10px;
 }
 
-/* TITRES plus “pro” */
+/* TITRES */
 h2{
   margin:0;
   font-size: 22px;
@@ -392,6 +422,7 @@ h2::before{
 
 .muted{ color: var(--muted); }
 .small{ font-size: 13px; color: var(--muted); margin-top: 10px; }
+
 .inline{
   text-decoration: none;
   color: rgba(240,211,138,0.92);
@@ -542,6 +573,8 @@ h2::before{
   border-radius: 999px;
   cursor: pointer;
   transition: background .18s var(--ease), transform .18s var(--ease), border-color .18s var(--ease);
+  z-index: 1;
+  position: relative;
 }
 .more-btn:hover{
   background: rgba(214,178,94,0.10);
@@ -550,51 +583,59 @@ h2::before{
 }
 .more-btn:active{ transform: translateY(0px) scale(0.985); }
 
-/* Option : respecte les préférences de mouvement */
-@media (prefers-reduced-motion: reduce){
-  *{ transition: none !important; scroll-behavior:auto; }
-}
 /* =========================
-   Page load animation (pro)
+   CINEMA REVEAL (scroll)
    ========================= */
 
-body.preload .hero,
-body.preload .card,
-body.preload .nav{
+.reveal{
   opacity: 0;
-  transform: translateY(10px);
-  filter: blur(6px);
+  transform: translateY(14px);
+  filter: blur(10px);
+  transition:
+    opacity .9s var(--ease),
+    transform .9s var(--ease),
+    filter .9s var(--ease);
+  will-change: transform, opacity, filter;
+  transition-delay: var(--d, 0ms);
 }
 
-.nav, .hero, .card{
+.reveal.is-visible{
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+/* Page load (nav + hero) */
+body.preload .nav,
+body.preload .hero{
+  opacity: 0;
+  transform: translateY(10px);
+  filter: blur(8px);
+}
+
+.nav, .hero{
   opacity: 1;
   transform: translateY(0);
   filter: blur(0);
   transition:
-    opacity .6s var(--ease),
-    transform .6s var(--ease),
-    filter .6s var(--ease);
+    opacity .8s var(--ease),
+    transform .8s var(--ease),
+    filter .8s var(--ease);
 }
 
-/* Stagger léger : les cards arrivent une par une */
-.card{
-  transition-delay: .08s;
-}
-.card:nth-of-type(2){ transition-delay: .12s; }
-.card:nth-of-type(3){ transition-delay: .16s; }
-.card:nth-of-type(4){ transition-delay: .20s; }
-.card:nth-of-type(5){ transition-delay: .24s; }
-.card:nth-of-type(6){ transition-delay: .28s; }
-.card:nth-of-type(7){ transition-delay: .32s; }
-.card:nth-of-type(8){ transition-delay: .36s; }
-
-body::after{
-  content:"";
-  position: fixed;
-  inset: 0;
-  pointer-events:none;
-  background-image:
-    repeating-linear-gradient(0deg, rgba(255,255,255,0.018), rgba(255,255,255,0.018) 1px, transparent 1px, transparent 3px);
-  opacity: .08;
-  mix-blend-mode: overlay;
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce){
+  *{ transition: none !important; scroll-behavior:auto; }
+  .card::before{ animation: none !important; }
+  .reveal{
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+  body.preload .nav,
+  body.preload .hero{
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
 }
