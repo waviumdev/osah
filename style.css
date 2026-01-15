@@ -323,9 +323,18 @@ a{ color:inherit; }
   inset:-1px;
   background:
     radial-gradient(700px 220px at 20% 0%, rgba(214,178,94,0.12), rgba(214,178,94,0) 60%),
-    radial-gradient(450px 180px at 90% 10%, rgba(240,211,138,0.10), rgba(240,211,138,0) 55%);
-  pointer-events:none;
-  opacity: .55;
+    radial-gradient(450px 180px at 90% 10%, rgba(240,211,138,0.10), rgba(240,211,138,0) 55%),
+    linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.05) 45%, transparent 60%);
+  background-size: auto, auto, 220% 220%;
+  background-position: center, center, 0% 0%;
+  animation: cardShine 10s var(--ease) infinite;
+  opacity: .50;
+}
+
+@keyframes cardShine{
+  0%   { background-position: center, center, 0% 0%; }
+  50%  { background-position: center, center, 100% 100%; }
+  100% { background-position: center, center, 0% 0%; }
 }
 
 /* petite bordure interne “verre” */
@@ -545,3 +554,36 @@ h2::before{
 @media (prefers-reduced-motion: reduce){
   *{ transition: none !important; scroll-behavior:auto; }
 }
+/* =========================
+   Page load animation (pro)
+   ========================= */
+
+body.preload .hero,
+body.preload .card,
+body.preload .nav{
+  opacity: 0;
+  transform: translateY(10px);
+  filter: blur(6px);
+}
+
+.nav, .hero, .card{
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+  transition:
+    opacity .6s var(--ease),
+    transform .6s var(--ease),
+    filter .6s var(--ease);
+}
+
+/* Stagger léger : les cards arrivent une par une */
+.card{
+  transition-delay: .08s;
+}
+.card:nth-of-type(2){ transition-delay: .12s; }
+.card:nth-of-type(3){ transition-delay: .16s; }
+.card:nth-of-type(4){ transition-delay: .20s; }
+.card:nth-of-type(5){ transition-delay: .24s; }
+.card:nth-of-type(6){ transition-delay: .28s; }
+.card:nth-of-type(7){ transition-delay: .32s; }
+.card:nth-of-type(8){ transition-delay: .36s; }
