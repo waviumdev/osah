@@ -378,3 +378,17 @@ h2{ margin:0; font-size: 22px; letter-spacing: -0.01em; }
   font-size: 14px;
   text-align: center;
 }
+.hidden{ display:none; }
+
+.more-btn{
+  margin-top: 10px;
+  background: none;
+  border: 1px solid rgba(214,178,94,0.35);
+  color: var(--gold2);
+  padding: 10px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+.more-btn:hover{
+  background: rgba(214,178,94,0.1);
+}
