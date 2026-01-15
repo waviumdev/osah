@@ -1,262 +1,335 @@
-:root{
-  --max: 1020px;
-  --border:#e9eaee;
-  --text:#0f0f10;
-  --muted:#6b6f76;
-  --bg1:#f6f7fb;
-  --bg2:#ffffff;
-  --shadow: 0 10px 30px rgba(15, 15, 16, 0.06);
-}
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
 
-*{ box-sizing:border-box; }
-html{ scroll-behavior:smooth; }
+  <title>Osah – rappeur français | Koverbalprod</title>
+  <meta name="description" content="Osah est un rappeur, beatmaker et ingénieur du son français, fondateur de Koverbalprod. Bio, discographie, clip et liens officiels." />
+  <link rel="canonical" href="https://osah.koverbalprod.com/" />
 
-body{
-  margin:0;
-  color:var(--text);
-  font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-  line-height:1.6;
-  background:
-    radial-gradient(1200px 600px at 20% -10%, #eef0ff 0%, rgba(238,240,255,0) 55%),
-    radial-gradient(900px 500px at 90% 10%, #e9fff7 0%, rgba(233,255,247,0) 55%),
-    linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 55%);
-}
+  <meta property="og:title" content="Osah – rappeur français" />
+  <meta property="og:description" content="Bio, discographie, clip en vedette, liens officiels – Koverbalprod." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://osah.koverbalprod.com/" />
+  <meta property="og:image" content="https://osah.koverbalprod.com/osah-rappeur.jpg" />
 
-a{ color:inherit; }
-.wrap{ max-width:var(--max); margin:0 auto; padding:24px; }
+  <link rel="stylesheet" href="style.css" />
 
-.skip{
-  position:absolute; left:-999px; top:10px;
-  background:#fff; border:1px solid var(--border);
-  padding:10px 12px; border-radius:12px;
-}
-.skip:focus{ left:24px; z-index:100; }
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MusicGroup",
+    "name": "Osah",
+    "genre": "Rap",
+    "url": "https://osah.koverbalprod.com/",
+    "memberOf": {
+      "@type": "Organization",
+      "name": "Koverbalprod",
+      "url": "https://koverbalprod.com/"
+    },
+    "sameAs": [
+      "https://music.apple.com/fr/artist/osah/1492256822",
+      "https://open.spotify.com/artist/1AeKlQFE3f4jMoiJyuhyM1",
+      "https://www.youtube.com/c/osahkoverbalprod",
+      "https://www.instagram.com/osah.koverbal/",
+      "https://www.tiktok.com/@osah.koverbalprod"
+    ]
+  }
+  </script>
+</head>
 
-/* NAVBAR */
-.nav{
-  position:sticky;
-  top:0;
-  z-index:50;
-  backdrop-filter: blur(10px);
-  background: rgba(255,255,255,0.72);
-  border-bottom: 1px solid var(--border);
-}
+<body>
+  <a class="skip" href="#main">Aller au contenu</a>
+  <div id="top"></div>
 
-.nav-inner{
-  max-width: var(--max);
-  margin: 0 auto;
-  padding: 12px 24px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:16px;
-}
+  <!-- Navbar injectée -->
+  <div data-nav></div>
 
-.brandmark img{
-  height: 46px;
-  width:auto;
-  display:block;
-}
+  <header class="wrap hero">
+    <div class="hero-left">
+      <p class="eyebrow">Artiste • Producteur • Ingé son</p>
+      <h1 class="title">Osah</h1>
+      <p class="subtitle">Rappeur, beatmaker & ingénieur du son — <span class="gold">Koverbalprod</span></p>
 
-.nav-links{
-  display:flex;
-  align-items:center;
-  gap:14px;
-  flex-wrap:wrap;
-}
+      <div class="hero-cta">
+        <a class="btn primary" href="#ecouter">Écouter</a>
+        <a class="btn ghost" href="#clip">Voir le clip</a>
+        <a class="btn ghost" href="#discographie">Discographie</a>
+      </div>
 
-.nav-links a{
-  text-decoration:none;
-  padding:8px 10px;
-  border-radius: 12px;
-  color: var(--muted);
-  border: 1px solid transparent;
-}
+      <div class="badges">
+        <span class="badge">Rap indépendant</span>
+        <span class="badge">Écriture introspective</span>
+        <span class="badge">Direction artistique</span>
+      </div>
+    </div>
 
-.nav-links a:hover{
-  color: var(--text);
-  border-color: var(--border);
-  background: rgba(255,255,255,0.7);
-}
+    <div class="hero-right">
+      <div class="portrait-frame">
+        <img src="osah-rappeur.jpg" alt="Portrait de Osah – Koverbalprod" />
+      </div>
+    </div>
+  </header>
 
-.nav-btn{
-  text-decoration:none;
-  font-weight:700;
-  padding:10px 12px;
-  border-radius: 14px;
-  border:1px solid #111;
-  background:#fff;
-}
+  <main id="main" class="wrap">
 
-.nav-btn:hover{ box-shadow: var(--shadow); }
+    <section id="bio" class="card">
+      <div class="card-head">
+        <h2>Bio</h2>
+        <span class="card-kicker">Présentation</span>
+      </div>
+      <p><strong>Osah</strong> est un rappeur, beatmaker et ingénieur du son français, fondateur du label <strong>Koverbalprod</strong>. Il développe un univers musical introspectif et moderne, mêlant rap, mélodies et écriture personnelle.</p>
+      <p>À travers ses morceaux, Osah explore des thèmes comme la liberté, l’identité, la résilience et la colère intérieure. Des titres comme <em>Tu dors</em>, <em>Survivors</em>, <em>PCC</em> ou la trilogie <em>Liberta</em> illustrent une approche artistique cohérente, entre émotion, engagement et énergie.</p>
+      <p>Artiste indépendant, il produit et façonne lui-même une grande partie de sa musique, ce qui lui permet de conserver une direction artistique forte. Présent sur Apple Music, Spotify, YouTube et TikTok, Osah construit progressivement une discographie pensée sur la durée, entre projets solo et collaborations internationales.</p>
+    </section>
 
-@media (max-width: 860px){
-  .nav-links{ display:none; }
-  .brandmark img{ height: 42px; }
-}
+    <section id="ecouter" class="card">
+      <div class="card-head">
+        <h2>Liens officiels</h2>
+        <span class="card-kicker">Streaming & réseaux</span>
+      </div>
 
-/* HEADER */
-.header{
-  display:grid;
-  gap:24px;
-  align-items:center;
-  grid-template-columns: 1.2fr 0.8fr;
-  padding-top: 22px;
-}
+      <div class="grid-2">
+        <div class="stack">
+          <a class="link-tile" target="_blank" rel="noopener noreferrer" href="https://music.apple.com/fr/artist/osah/1492256822">Apple Music</a>
+          <a class="link-tile" target="_blank" rel="noopener noreferrer" href="https://open.spotify.com/artist/1AeKlQFE3f4jMoiJyuhyM1">Spotify</a>
+          <a class="link-tile" target="_blank" rel="noopener noreferrer" href="https://www.youtube.com/c/osahkoverbalprod">YouTube</a>
+          <a class="link-tile" target="_blank" rel="noopener noreferrer" href="https://www.tiktok.com/@osah.koverbalprod">TikTok</a>
+          <a class="link-tile" target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/osah.koverbal/">Instagram</a>
+        </div>
 
-@media (max-width: 900px){
-  .header{ grid-template-columns: 1fr; }
-}
+        <div class="stack">
+          <div class="mini">
+            <h3>Contact pro</h3>
+            <p><a href="mailto:contact@koverbalprod.com">contact@koverbalprod.com</a></p>
+          </div>
+          <div class="mini">
+            <h3>Mail artiste</h3>
+            <p><a href="mailto:osah@koverbalprod.com">osah@koverbalprod.com</a></p>
+          </div>
+          <p class="note">Pour booking, presse ou collabs : répond sous 24–48h (quand ça tourne bien).</p>
+        </div>
+      </div>
+    </section>
 
-h1{
-  font-size: 58px;
-  margin: 6px 0 8px;
-  line-height: 1.03;
-  letter-spacing: -0.02em;
-}
+    <section id="clip" class="card">
+      <div class="card-head">
+        <h2>Clip en vedette</h2>
+        <span class="card-kicker">YouTube</span>
+      </div>
+      <p class="small">Tu dors</p>
+      <div class="video">
+        <iframe
+          src="https://www.youtube.com/embed/_K2iJz4ReyQ"
+          title="Osah – Tu dors"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen></iframe>
+      </div>
+      <p class="small"><a class="inline" target="_blank" rel="noopener noreferrer" href="https://youtu.be/_K2iJz4ReyQ?si=eS6yQqTkKexx3Tx_">Ouvrir sur YouTube</a></p>
+    </section>
 
-.subtitle{ margin:0 0 14px; color: var(--muted); }
+    <section id="discographie" class="card">
+      <div class="card-head">
+        <h2>Discographie</h2>
+        <span class="card-kicker">Sorties</span>
+      </div>
 
-.cta{ display:flex; gap:12px; flex-wrap:wrap; margin-bottom: 10px; }
+      <div class="disc">
+        <div class="disc-year">
+          <h3>2025</h3>
+          <ul>
+            <li><strong>Entre Colère Saine et Pensées Vives</strong> — Album (Koverbalprod &amp; 7ème Sens) • <span class="muted">Osah sur 5 titres / 7</span> • Sept. 2025</li>
+          </ul>
+        </div>
 
-.btn{
-  display:inline-block;
-  padding:10px 14px;
-  border:1px solid #111;
-  border-radius: 12px;
-  text-decoration:none;
-  font-weight:650;
-  background:#fff;
-}
+        <div class="disc-year">
+          <h3>2024</h3>
+          <ul>
+            <li><strong>VOYAGE</strong> — Album • 28 juin 2024</li>
+          </ul>
+        </div>
 
-.btn.ghost{ border-color: var(--border); background: rgba(255,255,255,0.8); }
-.btn:hover{ box-shadow: var(--shadow); border-color:#111; }
+        <div class="disc-year">
+          <h3>2023</h3>
+          <ul>
+            <li><strong>On attend pas</strong> — Single • 28 juil. 2023</li>
+            <li><strong>Sous nos yeux</strong> — Single • 13 avr. 2023</li>
+            <li><strong>Bons Beats Bruts, Vol. 2 (Instrumental)</strong> — EP • 2023</li>
+          </ul>
+        </div>
 
-.meta-line{ display:flex; gap:10px; flex-wrap:wrap; margin-top: 8px; }
-.pill{
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  padding: 6px 10px;
-  font-size: 13px;
-  color: var(--muted);
-  background: rgba(255,255,255,0.8);
-}
+        <div class="disc-year">
+          <h3>2022</h3>
+          <ul>
+            <li><strong>Tu dors</strong> — Single • 28 janv. 2022</li>
+            <li><strong>SURVIVORS</strong> — Single • 6 mai 2022</li>
+            <li><strong>PCC</strong> — Single • 23 sept. 2022</li>
+            <li><strong>Liberta 2</strong> — Single • 2022</li>
+            <li><strong>Liberta 3</strong> — Single • 2022</li>
+          </ul>
+        </div>
 
-.hero img{
-  width:100%;
-  height:auto;
-  border-radius: 22px;
-  border:1px solid var(--border);
-  box-shadow: var(--shadow);
-}
+        <div class="disc-year">
+          <h3>2021</h3>
+          <ul>
+            <li><strong>Liberta</strong> — Single • 2021</li>
+          </ul>
+        </div>
 
-/* CARDS */
-.card{
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 18px;
-  margin: 18px 0;
-  background: rgba(255,255,255,0.90);
-  box-shadow: 0 6px 22px rgba(15,15,16,0.04);
-}
+        <div class="disc-year">
+          <h3>2020</h3>
+          <ul>
+            <li><strong>Désordre Mondial</strong> — Single • 9 fév. 2020 <span class="muted">(composé en 2012, version publiée en 2020)</span></li>
+          </ul>
+        </div>
 
-.card.subtle{ background: rgba(255,255,255,0.65); }
+        <div class="disc-year">
+          <h3>2019</h3>
+          <ul>
+            <li><strong>Bons Beats Bruts, Vol. 1 (Instrumental)</strong> — Album • 2019</li>
+          </ul>
+        </div>
+      </div>
+    </section>
 
-h2{ margin:0 0 10px; font-size: 22px; letter-spacing: -0.01em; }
-h3{ margin:0 0 10px; font-size: 16px; color: var(--muted); }
+    <section id="collabs" class="card">
+      <div class="card-head">
+        <h2>Collaborations &amp; Featurings</h2>
+        <span class="card-kicker">Réseau</span>
+      </div>
 
-.small{ margin-top:10px; font-size:13px; color: var(--muted); }
-.inline{ text-decoration: underline; text-underline-offset: 3px; }
+      <p class="muted">Sélection indexable : artistes & producteurs (la liste s’agrandit au fil des sorties).</p>
 
-/* LINKS */
-.links{ list-style:none; padding:0; margin:0; display:grid; gap:10px; }
-.links a{
-  display:block;
-  padding:12px 14px;
-  border-radius: 14px;
-  border:1px solid var(--border);
-  text-decoration:none;
-  background:#fff;
-}
-.links a:hover{ border-color:#111; box-shadow: var(--shadow); }
+      <div class="chips-wrap" data-collabs>
+        <div class="chips" aria-label="Liste des collaborations">
+          <!-- tes chips (comme tu les as) -->
+          <span class="chip">6dlu</span>
+          <span class="chip">7ème Sens</span>
+          <span class="chip">Akila</span>
+          <span class="chip">Arless</span>
+          <span class="chip">Asfen</span>
+          <span class="chip">Asken</span>
+          <span class="chip">Black Moz</span>
+          <span class="chip">Caroline</span>
+          <span class="chip">Cazus Mc</span>
+          <span class="chip">陈明欢</span>
+          <span class="chip">Deal-M</span>
+          <span class="chip">DeeJay Prod</span>
+          <span class="chip">Dez</span>
+          <span class="chip">Diksa Rime</span>
+          <span class="chip">El Justin JB</span>
+          <span class="chip">El Professor Pom Pom</span>
+          <span class="chip">Fête de la Rime</span>
+          <span class="chip">Fhat.R</span>
+          <span class="chip">French Swiss Hemp</span>
+          <span class="chip">Freeze Santoro</span>
+          <span class="chip">Ganaro</span>
+          <span class="chip">Gui’R</span>
+          <span class="chip">Guillotine MC</span>
+          <span class="chip">Hab’s</span>
+          <span class="chip">Hell Kë</span>
+          <span class="chip">Jamin</span>
+          <span class="chip">JFM Villa</span>
+          <span class="chip">Jragon</span>
+          <span class="chip">Juv &amp; Nil</span>
+          <span class="chip">Kaisha</span>
+          <span class="chip">Karl Colson</span>
+          <span class="chip">King-K Savage</span>
+          <span class="chip">Leyden</span>
+          <span class="chip">Luka</span>
+          <span class="chip">Madame G</span>
+          <span class="chip">Manes</span>
+          <span class="chip">Mani Treize</span>
+          <span class="chip">Maté Beats</span>
+          <span class="chip">MC Arti</span>
+          <span class="chip">Mim’s</span>
+          <span class="chip">Mister Thib</span>
+          <span class="chip">Mugen le Nomade</span>
+          <span class="chip">Nalya</span>
+          <span class="chip">Nas R</span>
+          <span class="chip">Ninoff</span>
+          <span class="chip">Nokti Case Nègre</span>
+          <span class="chip">Obs’Kur</span>
+          <span class="chip">O2z</span>
+          <span class="chip">Onirik Dreamer</span>
+          <span class="chip">Orea</span>
+          <span class="chip">Pello</span>
+          <span class="chip">PhoenixRising</span>
+          <span class="chip">Pilot Enflam</span>
+          <span class="chip">Psycho</span>
+          <span class="chip">RickC</span>
+          <span class="chip">Rom d’Odsu</span>
+          <span class="chip">Samson</span>
+          <span class="chip">Saza Memphis</span>
+          <span class="chip">Seb 93.1</span>
+          <span class="chip">Shadow</span>
+          <span class="chip">Skile</span>
+          <span class="chip">SKZ</span>
+          <span class="chip">TB.Prod</span>
+          <span class="chip">Tema 193</span>
+          <span class="chip">Ters</span>
+          <span class="chip">Tony Blaster</span>
+          <span class="chip">Weedlack</span>
+          <span class="chip">Yaële</span>
+          <span class="chip">Zethy</span>
+        </div>
 
-.two-col{
-  display:grid;
-  gap:12px;
-  grid-template-columns: 1fr 1fr;
-  margin-top: 14px;
-}
-@media (max-width: 720px){ .two-col{ grid-template-columns: 1fr; } }
+        <div class="chips-actions">
+          <button class="btn smallbtn" type="button" data-toggle-collabs aria-expanded="false">Afficher plus</button>
+          <span class="muted small" data-collabs-count></span>
+        </div>
+      </div>
+    </section>
 
-.mini-card{
-  border:1px solid var(--border);
-  border-radius: 14px;
-  padding:12px 14px;
-  background:#fff;
-}
+    <section id="contact" class="card">
+      <div class="card-head">
+        <h2>Contact</h2>
+        <span class="card-kicker">Pro</span>
+      </div>
+      <p>Pro / booking : <a class="inline" href="mailto:contact@koverbalprod.com">contact@koverbalprod.com</a></p>
+      <p>Artiste : <a class="inline" href="mailto:osah@koverbalprod.com">osah@koverbalprod.com</a></p>
+    </section>
 
-/* VIDEO */
-.video-container{
-  position:relative;
-  padding-bottom:56.25%;
-  height:0;
-  overflow:hidden;
-  border-radius: 16px;
-  border:1px solid var(--border);
-  box-shadow: var(--shadow);
-  background:#000;
-}
-.video-container iframe{ position:absolute; inset:0; width:100%; height:100%; }
+    <footer class="footer">
+      <p>© <span id="year"></span> Osah — Koverbalprod.</p>
+    </footer>
+  </main>
 
-/* DISCOGRAPHY */
-.disc-year{ margin-top: 14px; }
-.disc-year h3{
-  margin: 10px 0 10px;
-  font-size: 14px;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-}
+  <script src="nav.js"></script>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
 
-.discography{ list-style:none; padding:0; margin:0; display:grid; gap:10px; }
-.discography li{
-  display:grid;
-  gap:6px;
-  padding:12px 14px;
-  border-radius: 14px;
-  border:1px solid var(--border);
-  background:#fff;
-}
-.track{ font-weight:700; }
-.meta{ color: var(--muted); font-size: 13px; }
+    // Collabs toggle
+    (function () {
+      const wrap = document.querySelector("[data-collabs]");
+      if (!wrap) return;
 
-/* CHIPS + TOGGLE */
-.chips{ display:flex; flex-wrap:wrap; gap:8px; margin: 12px 0 0; }
-.chip{
-  border:1px solid var(--border);
-  border-radius:999px;
-  padding:6px 10px;
-  font-size:13px;
-  background:#fff;
-}
+      const chips = wrap.querySelectorAll(".chip");
+      const btn = wrap.querySelector("[data-toggle-collabs]");
+      const counter = wrap.querySelector("[data-collabs-count]");
+      const LIMIT = 28;
 
-.chip-hidden{ display:none; }
+      if (counter) counter.textContent = `${chips.length} collaborations`;
 
-.chips-actions{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
-  margin-top: 14px;
-}
+      if (chips.length <= LIMIT) {
+        if (btn) btn.style.display = "none";
+        return;
+      }
 
-.toggle-btn{
-  border:1px solid #111;
-  background:#fff;
-  padding:10px 12px;
-  border-radius: 14px;
-  font-weight:700;
-  cursor:pointer;
-}
-.toggle-btn:hover{ box-shadow: var(--shadow); }
+      chips.forEach((chip, i) => { if (i >= LIMIT) chip.classList.add("chip-hidden"); });
 
-.footer{ opacity:.75; font-size:14px; padding-top:10px; color: var(--muted); }
+      btn.addEventListener("click", () => {
+        const expanded = btn.getAttribute("aria-expanded") === "true";
+        btn.setAttribute("aria-expanded", String(!expanded));
+        btn.textContent = expanded ? "Afficher plus" : "Afficher moins";
+
+        chips.forEach((chip, i) => {
+          if (i >= LIMIT) chip.classList.toggle("chip-hidden", expanded);
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
