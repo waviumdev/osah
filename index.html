@@ -523,7 +523,7 @@
     const items = document.querySelectorAll(".card");
     items.forEach((el, i) => {
       el.classList.add("reveal");
-      el.style.setProperty("--d", `${Math.min(i * 70, 420)}ms`);
+      el.style.setProperty("--d", `${Math.min(i * 35, 420)}ms`);
     });
 
     const io = new IntersectionObserver((entries) => {
