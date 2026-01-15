@@ -518,6 +518,38 @@
     document.body.classList.remove("preload");
   });
 </script>
+<script>
+  // Enlève l'état preload au chargement
+  window.addEventListener("load", () => {
+    document.body.classList.remove("preload");
+  });
 
+  // Reveal ciné au scroll
+  (function () {
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduceMotion) return;
+
+    const items = document.querySelectorAll(".card");
+    items.forEach((el, i) => {
+      el.classList.add("reveal");
+      // petit stagger (ciné = lent)
+      el.style.setProperty("--d", `${Math.min(i * 70, 420)}ms`);
+    });
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          io.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.12,
+      rootMargin: "0px 0px -8% 0px"
+    });
+
+    items.forEach((el) => io.observe(el));
+  })();
+</script>
 </body>
 </html>
