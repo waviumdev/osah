@@ -587,3 +587,14 @@ body.preload .nav{
 .card:nth-of-type(6){ transition-delay: .28s; }
 .card:nth-of-type(7){ transition-delay: .32s; }
 .card:nth-of-type(8){ transition-delay: .36s; }
+
+body::after{
+  content:"";
+  position: fixed;
+  inset: 0;
+  pointer-events:none;
+  background-image:
+    repeating-linear-gradient(0deg, rgba(255,255,255,0.018), rgba(255,255,255,0.018) 1px, transparent 1px, transparent 3px);
+  opacity: .08;
+  mix-blend-mode: overlay;
+}
