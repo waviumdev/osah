@@ -244,6 +244,7 @@
       </div>
     </section>
 
+    <div class="discography" data-features>
     <!-- APPARITIONS -->
     <section id="apparitions" class="card">
       <div class="card-head">
@@ -307,6 +308,10 @@
           </ul>
         </div>
       </div>
+      <div class="chips-actions">
+  <button class="btn smallbtn" type="button" data-toggle-features aria-expanded="false">Afficher plus</button>
+  <span class="muted small" data-features-count></span>
+</div>
     </section>
 
     <section id="collabs" class="card">
@@ -461,6 +466,40 @@
       });
     })();
 
+    function initYearToggle(containerSelector, buttonSelector, counterSelector, limitYears = 3) {
+  const container = document.querySelector(containerSelector);
+  if (!container) return;
+
+  const btn = document.querySelector(buttonSelector);
+  const counter = document.querySelector(counterSelector);
+  const years = container.querySelectorAll(".disc-year");
+
+  if (counter) counter.textContent = `${years.length} années`;
+
+  if (!btn || years.length <= limitYears) {
+    if (btn) btn.style.display = "none";
+    return;
+  }
+
+  // cache tout ce qui est après les X premières années
+  years.forEach((y, i) => { if (i >= limitYears) y.classList.add("disc-hidden"); });
+
+  btn.addEventListener("click", () => {
+    const expanded = btn.getAttribute("aria-expanded") === "true";
+    btn.setAttribute("aria-expanded", String(!expanded));
+    btn.textContent = expanded ? "Afficher plus" : "Afficher moins";
+
+    years.forEach((y, i) => {
+      if (i >= limitYears) y.classList.toggle("disc-hidden", expanded);
+    });
+  });
+}
+
+// Discographie (artiste principal)
+initYearToggle("[data-discography]", "[data-toggle-discography]", "[data-discography-count]", 3);
+
+// Apparitions (invité)
+initYearToggle("[data-features]", "[data-toggle-features]", "[data-features-count]", 3);
     // Discography toggle (par années)
     (function () {
       const disc = document.querySelector("[data-discography]");
